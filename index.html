@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Звездатый рейтинг</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+			var ratingWidth = 81; // ширина всех звездочек
+			var discreteCnt = 10; // кол-во дискретных значений
+			var starsCss = 0; // ширина, заданная пользователем (рейтинг в пикселях)
+			var OneCardRating = $('.rating-data').find('.ratingstars');
+
+			/**
+			 * При движении указателя мыши над звездочками заливаем/убираем заливку звездочек по дискретным значениям
+			 * (т.е. по пол-звездочки: 5 звездочек и 10 дискретных значений)
+			 */
+			OneCardRating.mousemove(function(e) {
+				if ($(this).hasClass('this_stop_rating') === false) {
+					var stars = $(this).children('span:eq(1)').children();
+					var coords = e.clientX - stars.offset().left; //текушая координата по оси Х
+					var starWidth = ratingWidth / discreteCnt; // ширина одного дискретного значения (в нашем случае пол-звездочки)
+					var rating = Math.ceil(coords / starWidth); // рейтинг = текущая координата / ширину дискретного значения
+					starsCss = rating * starWidth; // ширина, которую нужно закрасить
+					stars.css('width', starsCss);
+				}
+			});
+				
+
+			
+			});
+		
+	
+</script>
+</head>
+
+<body>
+<div class="rating-data">
+								
+<span class="udblocks ratingstars ">
+								<span class="stars greyback"></span>
+								<span class="stars gaugeholder">
+									<span class="stars greengauge" style="width: 40.5px;"></span>
+								</span>
+								<span class="stars starsovl"></span>
+							</span><br />
+								<input id="button"  type="button" value="Кнопка"/>
+							</div>
+							
+<style type="text/css">
+body
+{margin:200px}
+.ratingstars {
+    height: 16px;
+    position: relative;
+    top: 1px;
+    width: 81px;
+    cursor: pointer;
+}
+span {
+    display: inline-block;
+}
+.stars.greyback {
+    background: linear-gradient(to top, #7a7a7a, #cdcdcd); 
+}
+.stars {
+    position: absolute;
+    width: 80px;
+    height: 16px;
+    left: 0;
+    max-width: 80px;
+}
+.stars.gaugeholder {
+    overflow: hidden;
+}
+.stars.greengauge {
+    background: linear-gradient(to top, #ff7900, #fff655); 
+    width: 0;
+}
+.stars.starsovl {
+    background: url(icon-star.svg) repeat-x 0 center;
+    background-size: 16px;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+#button {
+	margin-top:80px;
+	width:80px;
+	border-radius: 7px;
+	border-style: ;
+	background: linear-gradient(to top, #e2e2e2, #f2f2f2);
+}
+
+</style>
+</body>
+</html>
